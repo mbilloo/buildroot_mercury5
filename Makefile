@@ -43,3 +43,6 @@ linux_clean:
 
 linux_update: linux_clean
 	$(call update_git_package,linux,msc313e_dev)
+
+clean:
+	$(MAKE)	-C $(BUILDROOT_PATH) clean
