@@ -48,11 +48,23 @@ steps:
     mount:
       - ./dl
 
-- name: main
+- name: dobuild
   image: m5_buildroot
   pull: if-not-exists
   commands:
   - make
+
+- name: publish
+  image: plugins/github-release
+  settings:
+    api_key:
+      from_secret: github_token
+    files: buildroot/output/images/sdcard.img
+  when:
+    event:
+    - cron
+    cron:
+    - nightly
 
 volumes:
   - name: cache
