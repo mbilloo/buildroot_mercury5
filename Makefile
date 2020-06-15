@@ -19,7 +19,13 @@ define update_git_package
 	rm -f dl/$(1)/$(1)-$(2).tar.gz
 endef
 
-.PHONY: all bootstrap buildroot_config buildroot linux_clean linux_update
+.PHONY: all \
+	bootstrap \
+	buildroot_config \
+	buildroot \
+	buildroot_dl \
+	linux_clean \
+	linux_update
 
 
 all: buildroot
@@ -37,6 +43,10 @@ buildroot_config:
 buildroot: $(OUTPUTS) $(DLDIR)
 	$(MAKE) -C $(BUILDROOT_PATH) $(BUILDROOT_ARGS) defconfig
 	$(MAKE) -C $(BUILDROOT_PATH) $(BUILDROOT_ARGS)
+
+buildroot_dl: $(OUTPUTS) $(DLDIR)
+	$(MAKE) -C $(BUILDROOT_PATH) $(BUILDROOT_ARGS) defconfig
+	$(MAKE) -C $(BUILDROOT_PATH) $(BUILDROOT_ARGS) source
 
 linux_clean:
 	$(call clean_pkg,$(BUILDROOT_PATH),linux-msc313e_dev)
