@@ -30,6 +30,8 @@ endef
 
 all: buildroot
 
+$(OUTPUTS):
+	mkdir -p $(OUTPUTS)
 
 bootstrap:
 	git submodule init
