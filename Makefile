@@ -33,6 +33,9 @@ all: buildroot
 $(OUTPUTS):
 	mkdir -p $(OUTPUTS)
 
+$(DLDIR):
+	mkdir -p $(DLDIR)
+
 bootstrap:
 	git submodule init
 	git submodule update
