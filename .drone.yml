@@ -62,9 +62,7 @@ steps:
     files: buildroot/output/images/sdcard.img
   when:
     event:
-    - cron
-    cron:
-    - nightly
+    - tag
 
 volumes:
   - name: cache
