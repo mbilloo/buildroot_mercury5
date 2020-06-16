@@ -8,6 +8,16 @@ concurrency:
 
 steps:
 
+- name: restore-cache
+  image: drillster/drone-volume-cache
+  volumes:
+  - name: cache
+    path: /cache
+  settings:
+    restore: true
+    mount:
+      - ./dl
+
 - name: createimage
   image: docker:latest
   volumes:
@@ -18,16 +28,6 @@ steps:
   - ls -l /var/run/
   - docker build -t m5_buildroot .
   - chmod -R o+rw ./
-
-- name: restore-cache
-  image: drillster/drone-volume-cache
-  volumes:
-  - name: cache
-    path: /cache
-  settings:
-    restore: true
-    mount:
-      - ./dl
 
 - name: bootstrap
   image: m5_buildroot
